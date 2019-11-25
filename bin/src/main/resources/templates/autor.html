@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+	<meta charset="UTF-8"/>
+</head>
+
+<body>
+	<h1>Información de autores</h1>
+
+    <p th:text="${autor.id}">Id</p>
+    <p th:text="${autor.nombre}">Nombre</p>
+    <p th:text="${autor.edad}">edad</tpd>
+    <p th:text="${autor.email}">email</p>
+
+</body>
+</html>
+
+
+
+
+	<!--
+	
+		codigo para imprimir un atributo suelto
+		  
+	<p th:text="'Hola ' + ${nombre}+' bienvenido'">Mi nombre</p>
+	<p th:text="'Tu edad es ' + ${edad}">24</p>
+	-->
+
+
+
+
+
+	<!-- 
+	
+		codigo para imprimir un objeto
+		
+	<p th:text="'Mira, un autor en mi web ' + ${autor.nombre}+' bienvenido'">Mi nombre</p>
+	<p th:text="'Autor, tu edad es ' + ${autor.edad}">edad</p>
+	<p th:text="'Autor, tu email es ' + ${autor.email}">email no encontrado</p>
+	
+	-->

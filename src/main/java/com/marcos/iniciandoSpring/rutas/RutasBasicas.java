@@ -21,13 +21,14 @@ import com.marcos.iniciandoSpring.beans.ListaAutores;
 @Controller
 public class RutasBasicas {
 
+	/*
 	@Autowired
 	Autor marcos;
 	
 	
 	@Autowired
 	Autor juan;
-	
+	*/
 	
 	
 	
@@ -39,18 +40,40 @@ public class RutasBasicas {
 									Model model) {
 	*/
 
+	
 	@GetMapping("/start")
 	public String rutaBasicaInicial(Model model) {
 		
-		List<Autor> listaAutores = ListaAutores.contruirLista();
+		List<Autor> listaAutores = ListaAutores.getListaAutores();
 		model.addAttribute("autores",listaAutores);
 
 		return "hola";
 	}
 	
 	
-
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/del/{id}")
+	public String borrar(@PathVariable Integer id, Model model){
+		System.out.println("Entra en la ruta");
+		ListaAutores.del(id);
+		List<Autor> listaAutores = ListaAutores.getListaAutores();
+		model.addAttribute("autores",listaAutores);
+		
+		return "hola";
+	}
+	
+	
+
+	/*
 	
 	@GetMapping("/autores/{id}")
 	public String verAutor(	@PathVariable Integer id,
@@ -61,7 +84,7 @@ public class RutasBasicas {
 		
 		return "autor"; //html
 	}	
-	
+	*/
 	
 	
 	
@@ -74,6 +97,7 @@ public class RutasBasicas {
 	@GetMapping("/comienzo")
 	public String rutaCero(	@RequestParam(required=false) Integer id, 
 							@RequestParam(required=false) String nombre) {
+		
 		
 		System.out.println("id: "+id);
 		System.out.println("nombre: "+nombre);
