@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marcos.iniciandoSpring.beans.Autor;
 import com.marcos.iniciandoSpring.beans.ListaAutores;
+import com.marcos.iniciandoSpring.beans.ListaPersonas;
+import com.marcos.iniciandoSpring.beans.Persona;
 
 @Controller
 public class RutasBasicas {
@@ -41,7 +43,26 @@ public class RutasBasicas {
 	*/
 
 	
-	@GetMapping("/start")
+	/*METODO PARA MOSTRAR UN AUTOR*/
+	@GetMapping("/autores/{id}")
+	public String mostrarautor(@PathVariable Integer id, Model model) {
+		Autor autor = ListaAutores.getAutor(id);
+		model.addAttribute("autor", autor);
+		return "autor";
+	}
+	
+	
+	
+	/**
+	 *METODO QUE LSITA LOS AUTORES GUARDADOS 
+	 */
+	
+	/*He camiado el get mapping para que funcione la ruta de personas por defecto este mapping debe de tener
+	 * 
+	 * (/)
+	 * 
+	 * */
+	@GetMapping("/inicio")
 	public String rutaBasicaInicial(Model model) {
 		
 		List<Autor> listaAutores = ListaAutores.getListaAutores();
@@ -52,46 +73,41 @@ public class RutasBasicas {
 	
 	
 	
+	/*
+	 * METODO QUE BORRAR UN AUTOR DE LA LISTA POR ID
+	 * */
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	@GetMapping("/del/{id}")
+	@GetMapping("/delautor/{id}")
 	public String borrar(@PathVariable Integer id, Model model){
-		System.out.println("Entra en la ruta");
-		ListaAutores.del(id);
+		System.out.println("Entra en borrar");
+		Autor salida = ListaAutores.del(id);
 		List<Autor> listaAutores = ListaAutores.getListaAutores();
 		model.addAttribute("autores",listaAutores);
+		model.addAttribute("salidas",salida);
 		
 		return "hola";
 	}
 	
 	
-
+	
+	
 	/*
+	 * METODO QUE EDITA UN AUTOR MEDIANTE UN ID (HAY QUE PASARLE LOS PARAMETROS NUEVOS POR LA URL)
+	 * 
+	 * */
 	
-	@GetMapping("/autores/{id}")
-	public String verAutor(	@PathVariable Integer id,
-							Model model) {
-		
-		Autor autor = ListaAutores.getAutor(id);
-		model.addAttribute("autor",autor);
-		
-		return "autor"; //html
-	}	
-	*/
-	
-	
-	
+	@GetMapping("/edit/{id}/{nombre}/{edad}/{email}")
+	public String edit(@PathVariable Integer id, @PathVariable String nombre, @PathVariable Integer edad, @PathVariable String email, Model model) {
+		System.out.println("Entra en editar");
+		ListaAutores.edit(id, nombre, edad, email);
+		List <Autor> listaAutores = ListaAutores.getListaAutores();
+		model.addAttribute("autores",listaAutores);
+		return "hola";
+	}
 	
 	
 	
-	
+	/*METODO PARA CARGAR UNA PAGINA DE INICIO PARA PRUEBAS*/
 	
 	
 	@GetMapping("/comienzo")
@@ -106,13 +122,21 @@ public class RutasBasicas {
 	}
 	
 	
-	
-	
 }
 
+	/*
+	@GetMapping("/autores/{id}")
+	public String verAutor(	@PathVariable Integer id,
+							Model model) {
+		
+		Autor autor = ListaAutores.getAutor(id);
+		model.addAttribute("autor",autor);
+		
+		return "autor"; //html
+	}	
 
-
-
+	*/
+	
 
 
 

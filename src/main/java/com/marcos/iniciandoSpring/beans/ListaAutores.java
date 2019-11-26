@@ -20,13 +20,22 @@ public class ListaAutores {
 	 * @return 
 	 */
 	
-	/*
+	
 	public static Autor getAutor(int id) {
-		
-		return lista.get(id);
+		Iterator <Autor> it = lista.iterator();
+		Autor salida = new Autor();
+		while(it.hasNext()) {
+			Autor autor = it.next();
+			
+			if(autor.getId() == id) {
+				salida = autor;
+			}
+			
+		}
+		return salida;
 		
 	}
-	*/
+	
 
 
 	/**
@@ -117,6 +126,7 @@ public class ListaAutores {
 	public static List<Autor> getListaAutores() {
 	
 		if (lista == null) {
+			
 			new ListaAutores();
 		}
 		
@@ -127,14 +137,16 @@ public class ListaAutores {
 	
 	
 	
-	public static void del(int id) {
+	public static Autor del(int id) {
 		System.out.println("Entra en el metodo del");
 		List <Autor> salida = new ArrayList <Autor>();
+		Autor autor_salida = new Autor();
 		Iterator <Autor> it = ListaAutores.lista.iterator();
 		while(it.hasNext()) {
 			Autor autor = it.next();
 			int idAutor = autor.getId();
 			if(idAutor == id){
+				autor_salida = autor;
 				it.remove();
 			}
 			else {
@@ -142,5 +154,32 @@ public class ListaAutores {
 			}
 		}
 		ListaAutores.lista = salida;
+		return autor_salida;
 	}
+	
+	
+	
+	public static void edit(int id, String nombre, int edad, String email) {
+		List <Autor> salida = new ArrayList <Autor>();
+		Iterator <Autor> it = ListaAutores.lista.iterator();
+		
+		while(it.hasNext()) {
+			Autor autor = it.next();
+			int idAutor = autor.getId();
+			if(idAutor == id) {
+				autor.setId(idAutor);
+				autor.setNombre(nombre);
+				autor.setEdad(edad);
+				autor.setEmail(email);
+				salida.add(autor);
+			}
+			else {
+				salida.add(autor);
+			}
+		}
+		ListaAutores.lista = salida;
+	}
+	
+	
+	
 }

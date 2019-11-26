@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista Personas</title>
+</head>
+<body>
+<h1>Esta es la lista de Personas</h1>
+<table>
+<tr>
+	
+	<td><h3>Nombre</h3></td>
+
+</tr>
+<tr th:each="perso:${persona}">
+
+	<td th:text="${perso.nombre}"></td>
+	
+</tr>
+</table>
+
+<h1 th:text="${salidas !=null} ? 'El autor ' +  ${salidas}  +  ' ha sido borrado' "></h1>
+</body>
+</html>

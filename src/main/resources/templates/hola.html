@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
-	<h1>Bienvenido aquí una lista de autores</h1>
+	<h1>Bienvenido aquï¿½ una lista de autores</h1>
 
     <table border="1">
       <tr>
@@ -19,6 +19,8 @@
       </tr>
     </table>
 	
+	
+	<h3 th:text="${salidas !=null} ? 'El autor ' +  ${salidas.nombre}  +  ' ha sido borrado' "></h3>
 
 </html>
 
